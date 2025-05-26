@@ -1,8 +1,10 @@
-# 🔍 Local Network Port Scan Report
+## Local Network Port Scan Report
 
 ## Overview
 
 This task was about scanning my local network to find open ports on devices in the `192.168.245.0/24` range. The goal was to get an idea of what services are running in the background and evaluate potential security risks.
+
+**This was done on a Windows 11 machine running a Kali VM and a mobile hotspot connection.**
 
 I used `nmap` for scanning, and the command I ran was:
 
@@ -11,7 +13,7 @@ nmap -sS 192.168.245.0/24
 ```
 ## Scan Results:
 
-🖥️ `192.168.245.1`
+ `192.168.245.1`
 Open Ports:
 
 135/tcp - msrpc
@@ -32,14 +34,14 @@ Open Ports:
 
 MAC Address: 00:50:56:C0:00:08 (VMware)
 
-This is likely a Windows VM running common Windows services like RPC and SMB. A few unfamiliar ports (like 1040 and 1057) could be third-party services or tools. These might be worth a closer look, especially if this machine shouldn’t be running custom services.
+This is my main Windows machine running common Windows services like RPC and SMB. A few unfamiliar ports (like 1040 and 1057) could be third-party services or tools. These might be worth a closer look, especially if this machine shouldn’t be running custom services.
 
 🖥️ `192.168.245.2`
 Open Port:
 
 53/tcp - domain (DNS)
 
-MAC Address: 00:50:56:F1:A9:CB (VMware)
+MAC Address: 00:50:56:F1:A9:CB 
 
 Port 53 suggests a DNS service is running. Could be a VM used for internal name resolution or testing.
 
@@ -81,13 +83,12 @@ This creates a file called scan.gnmap with a simplified, grep-friendly version o
 
 Once the .gnmap file was created, I used pandoc to convert it into an HTML file:
 
-bash
-Copy
-Edit
+```bash
 pandoc scan.gnmap -o scan.html
+```
 This generated a clean HTML page containing the scan data. You can open it in any browser or share it easily.
 
-📝 Tip: You can do the same with other output formats, like .txt or .md:
+
 ```bash
 pandoc scan.txt -o scan.html
 pandoc report.md -o report.html
